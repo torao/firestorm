@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.twitter:finagle-http_2.9.1:4.0.2">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/com/twitter/finagle-http_2.9.1/4.0.2/finagle-http_2.9.1-4.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/com/twitter/finagle-http_2.9.1/4.0.2/finagle-http_2.9.1-4.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/com/twitter/finagle-http_2.9.1/4.0.2/finagle-http_2.9.1-4.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
