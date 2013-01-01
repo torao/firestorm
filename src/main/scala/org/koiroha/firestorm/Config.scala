@@ -7,6 +7,7 @@
 package org.koiroha.firestorm
 
 import annotation.tailrec
+import java.io.PrintWriter
 
 /**
  * Firestorm server configuration.
@@ -16,7 +17,7 @@ class Config {
 	/**
 	 * Streaming server port.
 	 */
-	var streamingPort = 8085
+	def streamingPort = 8085
 
 	/**
 	 * Parse specified commandline parameters.
@@ -47,4 +48,14 @@ class Config {
 		case List() => None
 	}
 
+}
+
+object Config {
+
+	def help(out:PrintWriter):Unit = {
+		out.println(
+			"""java -jar firestorm.jar -p [port]
+			  |
+			""")
+	}
 }
