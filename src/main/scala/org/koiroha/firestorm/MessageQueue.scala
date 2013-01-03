@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012 koiroha.org.
  * All sources and related resources are available under Apache License 2.0.
- * http://www.apache.org/licenses/LICENSE-2.0.html
+ * org.koiroha.firestorm.http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 package org.koiroha.firestorm
@@ -21,5 +21,5 @@ trait MessageQueue {
 
 class LocalMessageQueue extends MessageQueue {
 
-	private[this] val queue = new ArrayBlockingQueue[]()
+	private[this] val queue = new ArrayBlockingQueue(Int.MaxValue)
 }

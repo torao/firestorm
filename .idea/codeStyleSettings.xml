@@ -16,9 +16,13 @@
           </value>
         </option>
         <option name="LINE_SEPARATOR" value="&#10;" />
+        <option name="RIGHT_MARGIN" value="100" />
         <ScalaCodeStyleSettings>
           <option name="SPACE_AFTER_TYPE_COLON" value="false" />
         </ScalaCodeStyleSettings>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
         <codeStyleSettings language="HTML">
           <indentOptions>
             <option name="INDENT_SIZE" value="2" />

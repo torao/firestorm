@@ -13,17 +13,109 @@
     <file path="/a.html" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356450648469" ignored="false" />
     <file path="/a.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356450655486" ignored="false" />
     <file path="/a.xml" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356450666181" ignored="false" />
-    <file path="/Config.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356818634953" ignored="false" />
-    <file path="/a.dummy" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356817361766" ignored="false" />
-    <file path="/Server.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357020746333" ignored="false" />
-    <file path="/MessageQueue.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356455810663" ignored="false" />
+    <file path="/Config.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357026340261" ignored="false" />
+    <file path="/a.dummy" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357170689312" ignored="false" />
+    <file path="/Server.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357171362708" ignored="false" />
+    <file path="/MessageQueue.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357026523581" ignored="false" />
     <file path="/State.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356456012486" ignored="false" />
     <file path="/standalone.xml" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356810955042" ignored="false" />
-    <file path="/Protocol.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356823509877" ignored="false" />
-    <file path="/package.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356821385920" ignored="false" />
-    <file path="/Session.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356819287936" ignored="false" />
-    <file path="/EventLog.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356823328509" ignored="false" />
+    <file path="/Protocol.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357163596878" ignored="false" />
+    <file path="/package.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357164107603" ignored="false" />
+    <file path="/Session.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357136751426" ignored="false" />
+    <file path="/EventLog.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357084005948" ignored="false" />
     <file path="/README.md" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357021493578" ignored="false" />
+    <file path="/fragment.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357173968802" ignored="false" />
+    <file path="/HttpServer.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357149966935" ignored="false" />
+    <file path="/ServerBuilder.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357079653090" ignored="false" />
+    <file path="/Http.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357136615364" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-registry/2.0.9/maven-plugin-registry-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/surefire/surefire/2.7.2/surefire-2.7.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/apache/3/apache-3.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/apache/9/apache-9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/reporting/maven-reporting/2.0.6/maven-reporting-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-parameter-documenter/2.0.9/maven-plugin-parameter-documenter-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/apache/4/apache-4.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus/2.0.6/plexus-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus/2.0.3/plexus-2.0.3.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-toolchain/2.0.9/maven-toolchain-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/io/netty/netty/3.4.1.Final/netty-3.4.1.Final.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-core/2.0.6/maven-core-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.4.3/maven-resources-plugin-2.4.3.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus/2.0.5/plexus-2.0.5.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.8/plexus-utils-1.5.8.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020721" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-parent/8/maven-parent-8.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-artifact/2.0.6/maven-artifact-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/surefire/surefire-providers/2.7.2/surefire-providers-2.7.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-parent/5/maven-parent-5.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/commons/commons-parent/20/commons-parent-20.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075080559" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-archiver/2.4.1/maven-archiver-2.4.1.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-parent/16/maven-parent-16.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-project/2.0.9/maven-project-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-model/2.0.6/maven-model-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven/2.0.9/maven-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/reporting/maven-reporting/2.0.9/maven-reporting-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven/2.0.6/maven-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-profile/2.0.6/maven-profile-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/apache/7/apache-7.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075020722" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/com/twitter/finagle-http_2.9.1/4.0.2/finagle-http_2.9.1-4.0.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021014" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-registry/2.0.6/maven-plugin-registry-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021014" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/surefire/maven-surefire-common/2.7.2/maven-surefire-common-2.7.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021014" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-artifact/2.0.9/maven-artifact-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021014" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-repository-metadata/2.0.6/maven-repository-metadata-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021014" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-parameter-documenter/2.0.6/maven-plugin-parameter-documenter-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-descriptor/2.0.6/maven-plugin-descriptor-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/shared/maven-common-artifact-filters/1.3/maven-common-artifact-filters-1.3.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-descriptor/2.0.9/maven-plugin-descriptor-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/shared/maven-filtering/1.0-beta-4/maven-filtering-1.0-beta-4.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-parent/13/maven-parent-13.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/plugins/maven-install-plugin/2.3.1/maven-install-plugin-2.3.1.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus/2.0.7/plexus-2.0.7.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus/2.0.2/plexus-2.0.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075080559" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.5/plexus-utils-2.0.5.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/commons-codec/commons-codec/1.5/commons-codec-1.5.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075080559" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-monitor/2.0.9/maven-monitor-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-monitor/2.0.6/maven-monitor-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-model/2.0.9/maven-model-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-repository-metadata/2.0.9/maven-repository-metadata-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-error-diagnostics/2.0.9/maven-error-diagnostics-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin/2.7.2/maven-surefire-plugin-2.7.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-core/2.0.9/maven-core-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/surefire/surefire-booter/2.7.2/surefire-booter-2.7.2.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-profile/2.0.9/maven-profile-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/apache/8/apache-8.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/sonatype/oss/oss-parent/7/oss-parent-7.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/sonatype/forge/forge-parent/3/forge-parent-3.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/apache/6/apache-6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/plugins/maven-plugins/18/maven-plugins-18.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-artifact-manager/2.0.9/maven-artifact-manager-2.0.9.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/hamcrest/hamcrest-parent/1.1/hamcrest-parent-1.1.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/plugins/maven-jar-plugin/2.3.1/maven-jar-plugin-2.3.1.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-artifact-manager/2.0.6/maven-artifact-manager-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
+    <file path="/ServerConfig.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357149589301" ignored="false" />
+    <file path="/StreamBuffer.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357124542209" ignored="false" />
+    <file path="/Endpoint.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357158222784" ignored="false" />
+    <file path="/Diagnostics.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357147513432" ignored="false" />
+    <file path="/FirestormMBean.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357156573347" ignored="false" />
+    <file path="/jmx.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357174913711" ignored="false" />
+    <file path="/Transmit.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357154816427" ignored="false" />
+    <file path="/Dispatcher.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357175673901" ignored="false" />
+    <file path="/echo.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357163541324" ignored="false" />
+    <file path="/EchoServer.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357163763356" ignored="false" />
+    <file path="/Scala Console" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357167426451" ignored="false" />
+    <file path="/SBT" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357172572707" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,8 +144,8 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -68,11 +160,12 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -82,79 +175,85 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Server.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Server.scala">
+      <file leaf-file-name="Server.scala" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Server.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="0" selection-start="3571" selection-end="3571" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#209#245#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventLog.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/EventLog.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="16" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#202#235#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="17" selection-start="221" selection-end="221" vertical-scroll-proportion="0.2173913">
+            <state line="77" column="5" selection-start="2025" selection-end="2025" vertical-scroll-proportion="2.0689654">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerBuilder.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/ServerBuilder.scala">
+      <file leaf-file-name="Dispatcher.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Dispatcher.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="21" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0">
+            <state line="187" column="5" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#209#253#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#202#228#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Session.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Session.scala">
+      <file leaf-file-name="echo.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/echo.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="13" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0">
+            <state line="10" column="8" selection-start="232" selection-end="232" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/package.scala">
+      <file leaf-file-name="EchoServer.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/EchoServer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="26" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+            <state line="21" column="20" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jmx.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/jmx.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="13" selection-start="2110" selection-end="2110" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Option.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/Library/scala-2.9.2/src/scala-library-src.jar!/scala/Option.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="196" column="0" selection-start="6863" selection-end="6863" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Endpoint.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Endpoint.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="89" column="0" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Protocol.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Protocol.scala">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Protocol.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0">
+            <state line="20" column="20" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="standalone.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/standalone.xml">
+      <file leaf-file-name="HttpServer.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/HttpServer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="0" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0">
+            <state line="22" column="0" selection-start="334" selection-end="596" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -170,22 +269,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Operation.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/State.scala" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/conf/standalone.xml" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Config.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/finagle/Server.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Server.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Protocol.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Config.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/ServerBuilder.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Session.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/jmx/Diagnostics.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/ServerConfig.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/jmx/FirestormMBean.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/HttpServer.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/jmx/jmx.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/org/koiroha/firestorm/jmx/Transmit.java" />
         <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/package.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Protocol.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Endpoint.scala" />
+        <option value="$PROJECT_DIR$/src/examples/scala/org/koiroha/firestorm/examples/EchoServer.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/echo.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/EventLog.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Protocol.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Server.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/README.md" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/EchoServer.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Server.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/jmx.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Dispatcher.scala" />
       </list>
     </option>
   </component>
@@ -206,10 +305,6 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="firestorm" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Dependencies" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -238,6 +333,9 @@
         <expanded-state>
           <State>
             <id />
+          </State>
+          <State>
+            <id>Android Lint</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -274,6 +372,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -292,22 +392,114 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firestorm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="options.lastSelected" value="org.jetbrains.plugins.scala.compiler.ScalaApplicationSettingsForm" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.m2/repository" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.26923078" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -320,11 +512,74 @@
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.koiroha.firestorm" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.EchoServer">
+    <configuration default="false" name="HttpServer" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="org.koiroha.firestorm.server.HttpServer" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="firestorm" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="EchoServer" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="org.koiroha.firestorm.server.EchoServer" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="firestorm" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Scala Console" type="ScalaScriptConsoleRunConfiguration" factoryName="Scala Console" temporary="true">
+      <module name="firestorm" />
+      <setting name="vmparams4" value="-Djline.terminal=NONE" />
+      <setting name="consoleArgs" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -350,6 +605,13 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="ScalaScriptConsoleRunConfiguration" factoryName="Scala Console">
+      <module name="" />
+      <setting name="vmparams4" value="-Djline.terminal=NONE" />
+      <setting name="consoleArgs" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -434,7 +696,18 @@
       <patterns />
       <method />
     </configuration>
-    <list size="0" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Application.HttpServer" />
+      <item index="1" class="java.lang.String" itemvalue="Application.EchoServer" />
+      <item index="2" class="java.lang.String" itemvalue="Scala Console.Scala Console" />
+    </list>
+    <recent_temporary>
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Application.EchoServer" />
+        <item index="1" class="java.lang.String" itemvalue="Scala Console.Scala Console" />
+        <item index="2" class="java.lang.String" itemvalue="Application.HttpServer" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -467,26 +740,46 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="2">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28553617" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24625" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14060259" sideWeight="0.34125" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21018651" sideWeight="0.75375" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24563591" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18364419" sideWeight="0.57107234" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18364419" sideWeight="0.13466334" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14060259" sideWeight="0.40375" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19512194" sideWeight="0.71446383" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20698254" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -547,132 +840,129 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/com/twitter/finagle-stream_2.9.1/4.0.2/finagle-stream_2.9.1-4.0.2.jar!/com/twitter/finagle/stream/Stream.class">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/StreamBuffer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="919" selection-end="919" vertical-scroll-proportion="0.37190083">
+        <state line="29" column="5" selection-start="758" selection-end="758" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/ServerConfig.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="572" selection-end="572" vertical-scroll-proportion="0.50098234">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/State.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="24" selection-start="226" selection-end="226" vertical-scroll-proportion="0.11787819">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/standalone.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Config.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="26" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#202#227#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/finagle/Server.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="27" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0">
+        <state line="26" column="14" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#210#255#0" expanded="true" />
+            <element signature="e#224#301#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/src.zip!/java/nio/channels/SocketChannel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/http/Http.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="478" column="24" selection-start="18116" selection-end="18116" vertical-scroll-proportion="0.39698493">
+        <state line="46" column="0" selection-start="1305" selection-end="1305" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/src.zip!/java/nio/channels/Selector.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/src.zip!/java/util/Timer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="349" column="24" selection-start="13215" selection-end="13215" vertical-scroll-proportion="2.7705193">
+        <state line="130" column="11" selection-start="4790" selection-end="4790" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/koiroha/firestorm/jmx/Transmit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="556" selection-end="556" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/MessageQueue.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/HttpServer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="50" selection-start="525" selection-end="525" vertical-scroll-proportion="0.58762884">
+        <state line="22" column="0" selection-start="334" selection-end="596" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/package.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Protocol.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="26" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+        <state line="20" column="20" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Session.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Endpoint.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0">
+        <state line="89" column="0" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/ServerBuilder.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/echo.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="21" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#209#253#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Protocol.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0">
+        <state line="10" column="8" selection-start="232" selection-end="232" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/Server.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="0" selection-start="3571" selection-end="3571" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#209#245#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/EventLog.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="16" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
+        <state line="25" column="24" selection-start="705" selection-end="705" vertical-scroll-proportion="0.1923077">
           <folding>
-            <element signature="e#202#235#0" expanded="true" />
+            <element signature="e#224#257#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="jar://$USER_HOME$/Library/scala-2.9.2/src/scala-library-src.jar!/scala/Option.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="17" selection-start="221" selection-end="221" vertical-scroll-proportion="0.2173913">
+        <state line="196" column="0" selection-start="6863" selection-end="6863" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/src.zip!/java/net/SocketInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="149" column="0" selection-start="4151" selection-end="4151" vertical-scroll-proportion="0.33211678" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/jmx.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="13" selection-start="2110" selection-end="2110" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/EchoServer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="20" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Dispatcher.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="187" column="5" selection-start="4870" selection-end="4870" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#202#228#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Server.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="5" selection-start="2025" selection-end="2025" vertical-scroll-proportion="2.0689654">
           <folding />
         </state>
       </provider>
@@ -686,7 +976,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.4150289" />
               </list>
             </option>
           </splitter-proportions>
@@ -710,7 +1000,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.4150289" />
               </list>
             </option>
           </splitter-proportions>
@@ -721,7 +1011,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.4150289" />
               </list>
             </option>
           </splitter-proportions>
@@ -733,7 +1023,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.26923078" />
               </list>
             </option>
           </splitter-proportions>
@@ -745,7 +1035,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.26923078" />
                 <option value="0.5" />
               </list>
             </option>
