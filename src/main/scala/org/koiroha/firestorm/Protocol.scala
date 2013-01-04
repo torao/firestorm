@@ -8,22 +8,6 @@ package org.koiroha.firestorm
 
 import scala.annotation.tailrec
 
-trait Protocol[T] {
-
-	val name:String
-
-	def open(endpoint:Endpoint[T]):Unit
-
-	def close(endpoint:Endpoint[T]):Unit
-
-	/**
-	 * Call to receive data from remote passively.
-	 * @param endpoint
-	 */
-	def receive(endpoint:Endpoint[T]):Unit
-
-}
-
 /**
  * Utility functions for protocol implementation.
  */

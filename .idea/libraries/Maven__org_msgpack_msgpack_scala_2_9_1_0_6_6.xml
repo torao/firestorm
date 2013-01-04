@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.msgpack:msgpack-scala_2.9.1:0.6.6">
     <CLASSES>
-      <root url="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/org/msgpack/msgpack-scala_2.9.1/0.6.6/msgpack-scala_2.9.1-0.6.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/msgpack/msgpack-scala_2.9.1/0.6.6/msgpack-scala_2.9.1-0.6.6.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/org/msgpack/msgpack-scala_2.9.1/0.6.6/msgpack-scala_2.9.1-0.6.6-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/msgpack/msgpack-scala_2.9.1/0.6.6/msgpack-scala_2.9.1-0.6.6-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$APPLICATION_HOME_DIR$/bin/.m2/repository/org/msgpack/msgpack-scala_2.9.1/0.6.6/msgpack-scala_2.9.1-0.6.6-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/msgpack/msgpack-scala_2.9.1/0.6.6/msgpack-scala_2.9.1-0.6.6-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

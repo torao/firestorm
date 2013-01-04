@@ -1,117 +1,53 @@
 /*
- * Copyright (c) 2012 koiroha.org.
+ * Copyright (c) 2013 koiroha.org.
  * All sources and related resources are available under Apache License 2.0.
- * org.koiroha.firestorm.http://www.apache.org/licenses/LICENSE-2.0.html
+ * http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 package org.koiroha.firestorm
 
-import org.koiroha.firestorm.jmx.ServerMXBeanImpl
-import java.nio.channels.SocketChannel
+import java.nio.channels.{ServerSocketChannel, SelectionKey}
+import java.net.{SocketAddress, InetSocketAddress}
 
 /**
- * Generic asynchronous server.
+ * 指定されたディスパッチャー上でサービスを行うサーバを構築します。
+ * @param dispatcher ディスパッチャー
  */
-class Server[T](config:ServerConfig, protocol:Protocol[T], mxbean:Option[ServerMXBeanImpl]){
+case class Server[T](dispatcher:Dispatcher) {
 
-	val id = config.id
+	private[this] var selectionKey:Option[SelectionKey] = None
+	private[this] var accept:Option[(Server[T], Endpoint[T])=>Unit] = None
 
-	/**
-	 * Server connection state that have ServerSocket.
-	 */
-	var dispatcher:Option[Dispatcher[T]] = None
-
-	val started = new Object()
-
-	/**
-	 * Startup this server and wait to be acceptable connections if it didn't start yet.
-	 */
-	def startup():Unit = synchronized{
-		if(! dispatcher.isDefined){
-			EventLog.info("starting \"%s\" server at %s on port %d".format(
-				config.id, config.address.getAddress.getHostAddress, config.address.getPort))
-
-			val d = new ServerDispatcher()
-			d.add(config.createServerChannel())
-
-			started.synchronized{
-				d.start()
-				started.wait()
-			}
-			dispatcher = Some(d)
-		}
+	private[firestorm] def onAccept(endpoint:Endpoint[T]):Unit = {
+		accept.foreach{ _(this, endpoint) }
 	}
 
 	/**
-	 * Shutdown server.
-	 * @param gracefulWaitInMillis
+	 * サーバが接続を受け付けたときの処理を指定します。
+	 * @param f Accept 時の処理
+	 * @return
 	 */
-	def shutdown(gracefulWaitInMillis:Long):Unit = synchronized{
-		dispatcher.foreach { d =>
-			try {
-				d.shutdown(gracefulWaitInMillis)
-				EventLog.info("shutdown \"%s\" server at %s on port %d".format(
-					id, config.address.getAddress.getHostAddress, config.address.getPort))
-			} catch {
-				case ex:Exception => ex.printStackTrace()
-			}
-		}
-		dispatcher = None
+	def onAccept(f:(Server[T], Endpoint[T])=>Unit):Server[T] = {
+		accept = Option(f)
+		this
 	}
 
 	/**
-	 * Reboot this server. This method is utility of shutdown-startup sequence.
+	 * 指定されたポート上で Listen するサーバを構築します。
+	 * @param port
 	 */
-	def reboot(gracefulShutdownInMillis:Long):Unit = synchronized{
-		shutdown(gracefulShutdownInMillis)
-		startup()
-	}
+	def listen(port:Int):Server[T] = listen(new InetSocketAddress(port), -1)
 
-	private[firestorm] class ServerDispatcher extends Dispatcher[T](config.id, config.readBufferSize) {
-
-		override def onStartup():Unit = {
-			EventLog.debug("starting server thread: \"%s\"".format(id))
-			started.synchronized {
-				started.notify()
-			}
-			mxbean.foreach { _.start(Server.this) }
-		}
-
-		override def onShutdown():Unit = {
-			mxbean.foreach { _.stop() }
-			EventLog.debug("finishing server thread: \"%s\"".format(id))
-		}
-
-		override def onAccept(channel:SocketChannel):Unit = {
-			config.initClientChannel(channel)
-		}
-
-		override def onOpen(endpoint:Endpoint[T]):Unit = {
-			mxbean.foreach { _.addClientCount(1) }
-			protocol.open(endpoint)
-		}
-
-		override def onClosing(endpoint:Endpoint[T]):Unit = {
-			try{
-				protocol.close(endpoint)
-			} catch {
-				case ex:Exception =>
-					EventLog.warn(ex, "exception caught while shutting-down socket: " + protocol.name)
-			}
-		}
-
-		override def onClosed(endpoint:Endpoint[T]):Unit = {
-			mxbean.foreach { _.addClientCount(-1) }
-		}
-
-		override def onRead(endpoint:Endpoint[T], length:Int):Unit = {
-			protocol.receive(endpoint)
-			mxbean.foreach { _.addReadBytes(length) }
-		}
-
-		override def onWrite(endpoint:Endpoint[T], length:Int):Unit = {
-			mxbean.foreach { _.addWriteBytes(length) }
-		}
+	/**
+	 * 指定されたアドレス上で Listen するサーバを構築します。
+	 * @param local
+	 * @param backlog
+	 */
+	def listen(local:SocketAddress, backlog:Int):Server[T] = {
+		val channel = ServerSocketChannel.open()
+		channel.bind(local, backlog)
+		selectionKey = Some(dispatcher.bind(channel, this))
+		this
 	}
 
 }

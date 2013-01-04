@@ -8,64 +8,217 @@ package org.koiroha.firestorm
 
 import java.nio.channels._
 import java.nio.ByteBuffer
-import java.util.concurrent.{LinkedBlockingQueue, ArrayBlockingQueue}
+import java.util.concurrent.ArrayBlockingQueue
 import scala.collection.JavaConversions._
-import java.io.IOException
+import org.koiroha.firestorm.jmx.DispatcherMXBeanImpl
+import java.net.{ServerSocket, Socket}
 
 /**
+ * `Dispatcher` は非同期 Socket I/O を行います。
  *
+ * @param id このディスパッチャーの ID (JMX 名に使用)
  */
-private[firestorm] class Dispatcher[T](id:String, readBufferSize:Int) extends Thread {
-	setName("FirestormServer[%s]".format(id))
-	setDaemon(false)
+class Dispatcher(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:Long = Long.MaxValue){
 
 	/**
-	 * Channel selector on this dispatcher.
+	 * select() から各 Channel の入出力処理を行うスレッドです。
 	 */
-	val selector = Selector.open()
+	private[this] var dispatcher:Option[Thread] = None
 
 	/**
-	 * Shared internal buffer to read data from all socket. This instance is never shared between
-	 * threads.
- 	 */
-	val readBuffer = ByteBuffer.allocateDirect(readBufferSize)
+	 * ディスパッチャースレッド内で行う処理のキューです。
+	 */
+	private[this] val queue = new ArrayBlockingQueue[()=>Unit](10)
 
-	val joinQueue = new ArrayBlockingQueue[()=>Unit](100)
+	/**
+	 * このディスパッチャーが使用する `Selector`。ディスパッチャースレッドが停止しても shutdown が行われるまで
+	 * クローズされない
+	 */
+	private[this] val selector = Selector.open()
 
-	def add(channel:SocketChannel){
-		execEventLoop { () => join(channel) }
+	/**
+	 * すべての Socket で共有する内部的な読み込みバッファ。ディスパッチャースレッド内でのみ使用するためスレッド間で
+	 * 共有されない。
+	 */
+	private[this] val readBuffer = ByteBuffer.allocateDirect(readBufferSize)
+
+	/**
+	 * このディスパッチャーを監視しているリスナ。
+	 */
+	private[this] var listeners = List[DispatcherListener]()
+
+	/**
+	 * このディスパッチャーを JMX で監視する MXBean。
+	 */
+	private[this] val mxbean = new DispatcherMXBeanImpl(this)
+
+	/**
+	 * 接続済みの Socket チャネルをこのディスパッチャーにバインドします。
+	 * @param channel バインドするチャネル
+	 * @return 接続したエンドポイント
+	 */
+	private[firestorm] def bind[T](channel:SocketChannel, endpoint:Endpoint[T]) = {
+		execInDispatcherThread{ () => openSelectionKey(channel, endpoint) }
 	}
 
-	def add(channel:ServerSocketChannel){
-		execEventLoop { () =>
+	/**
+	 * 接続済みの ServerSocket チャネルをこのディスパッチャーにバインドします。
+	 * @param channel バインドするチャネル
+	 */
+	private[firestorm] def bind[T](channel:ServerSocketChannel, server:Server[T]):SelectionKey = {
+		execInDispatcherThread { () =>
 			channel.configureBlocking(false)
-			channel.register(selector, SelectionKey.OP_ACCEPT)
+			channel.register(selector, SelectionKey.OP_ACCEPT, server)
 		}
 	}
 
-	private[this] def execEventLoop(job:()=>Unit){
-		joinQueue.put(job)
+	def +=(l:DispatcherListener):Unit = listeners ::= l
+	def -=(l:DispatcherListener):Unit = listeners = listeners.filter{ _ != l }
+	private[firestorm] def eachListener(f:(DispatcherListener)=>Unit){
+		listeners.foreach { f }
+	}
+
+	/**
+	 * このディスパッチャーが使用しているすべての Socket をクローズし処理を終了します。
+	 * @param gracefulCloseInMillis gracefully close in milliseconds
+	 */
+	def shutdown(gracefulCloseInMillis:Long):Unit = {
+
+		// JavaVM 上にデーモンスレッドしかない場合 shutdown ディスパッチャースレッドが停止する同時に JavaVM が
+		// 終了するため警告
+		if(Thread.currentThread().isDaemon){
+			EventLog.warn("shutdown is processing in daemon thread; note that jvm will exit immediately" +
+				" in case it becomes only daemon threads by the end of this server")
+		}
+
+		execInDispatcherThread { () =>
+
+		// ServerSocket をクローズして新しい接続の受け付けを停止
+			selector.keys().filter{ _.channel().isInstanceOf[ServerSocketChannel] }.foreach { key =>
+				key.cancel()
+				EventLog.debug("closing server channel %s on port %d".format(
+					key.channel().asInstanceOf[ServerSocketChannel].socket().getInetAddress.getHostAddress,
+					key.channel().asInstanceOf[ServerSocketChannel].socket().getLocalPort
+				))
+				key.channel().close()
+			}
+
+			// すべての Endpoint に対してクローズ要求を実行
+			selector.keys().filter{ _.attachment().isInstanceOf[Endpoint[_]] }.map{ _.attachment().asInstanceOf[Endpoint[_]] }.foreach { e =>
+				e.onShutdown()
+				e.close()
+				listeners.foreach { _.onClosing(e) }
+			}
+
+			// すべての SelectionKey が取り除かれるまで待機
+			val start = System.nanoTime()
+			while((System.nanoTime() - start) / 1000 / 1000 < gracefulCloseInMillis && selector.keys().size() > 0){
+				Thread.sleep(300)
+			}
+
+			// 残っているすべてのチャネルを強制的にクローズ
+			selector.keys().foreach { key =>
+				EventLog.warn("unclosed selection-key remaining: %s".format(key))
+				closeSelectionKey(key)
+			}
+
+			// ディスパッチャースレッドに割り込みを行いスレッドを停止
+			Thread.currentThread().interrupt()
+			selector.wakeup()
+		}
+
+		// Selector をクローズ
+		selector.close()
+
+		// すべてのリスナに shutdown を通知
+		listeners.foreach { _.onShutdown() }
+	}
+
+	/**
+	 * 指定された処理をディスパッチャースレッド内で実行します。
+	 * @param job ディスパッチャースレッド内で行う処理
+	 */
+	private[this] def asyncExecInDispatcherThread(job:()=>Unit):Unit = queue.synchronized {
+
+		// Selector がクローズ状態ならすでに shutdown 済み
+		if(! selector.isOpen){
+			throw new IllegalStateException("dispatcher already shutdown")
+		}
+
+		// ディスパッチャースレッドが開始していなければ開始する
+		if(! dispatcher.isDefined){
+			val thread = new Thread(){
+				override def run():Unit = dispatch()
+			}
+			thread.setName("Firestorm I/O Dispatcher [%s]".format(id))
+			thread.setDaemon(false)
+			thread.start()
+			dispatcher = Some(thread)
+		}
+
+		// キューに処理を投入
+		queue.put(job)
+
+		// select() で停止している処理を起動
 		selector.wakeup()
 	}
 
-	override def run():Unit = try {
-		onStartup()
+	/**
+	 * 指定された処理をディスパッチャースレッド内で実行します。
+	 * @param job ディスパッチャースレッド内で行う処理
+	 */
+	private[this] def execInDispatcherThread[T](job:()=>T):T = {
+		val signal = new Object()
+		var result = List[T]()
+		signal.synchronized {
+			asyncExecInDispatcherThread { () =>
+				signal.synchronized {
+					result ::= job()
+					signal.notify()
+				}
+			}
+			signal.wait()
+		}
+		result(0)
+	}
+
+	/**
+	 * ディスパッチ処理を開始します。
+	 */
+	private[this] def dispatch():Unit = try {
 
 		// loop while reject ServerSocketChannel from selector
-		while (! this.isInterrupted) {
-			val count = selector.select()
+		var idleStartTime:Option[Long] = None
+		while (! Thread.currentThread().isInterrupted) {
 
-			while(! joinQueue.isEmpty){
-				joinQueue.take()()
+			// キューに投入されている処理を実行
+			while(! queue.isEmpty){
+				queue.take()()
 			}
 
-			if(count > 0){
+			// 入出力可能になった Socket の処理を実行
+			if(selector.select(1000) > 0){
 				val selectedKeys = selector.selectedKeys()
-				selectedKeys.toList.foreach {   // ConcurrentModificationException
+				// ※ループ内の remove() により ConcurrentModificationException が発生するため toList している
+				selectedKeys.toList.foreach {
 					key =>
 						selectedKeys.remove(key)
 						selected(key)
 				}
+				idleStartTime = None
+			} else if (selector.keys().isEmpty){
+				// Selector の処理する SelectionKey がなくなって一定時間経過したら Selector や Channel をそのままで
+				// スレッドのみを終了
+				idleStartTime match {
+					case Some(t) =>
+						if((System.nanoTime() - t) / 1000 / 1000 > maxIdleInMillis){
+							Thread.currentThread().interrupt()
+						}
+					case None =>
+						idleStartTime = Some(System.nanoTime())
+				}
+			} else {
+				idleStartTime = None
 			}
 		}
 	} catch {
@@ -75,12 +228,17 @@ private[firestorm] class Dispatcher[T](id:String, readBufferSize:Int) extends Th
 			}
 			EventLog.fatal(ex, "")
 	} finally {
-		onShutdown()
+
+		// スレッド終了
+		queue.synchronized {
+			assert(dispatcher.get == Thread.currentThread())
+			dispatcher = None
+		}
 	}
 
 	/**
-	 * Handle single selection key.
-	 * @param key selected key
+	 * 単一の SelectionKey を処理します。
+	 * @param key 入出力可能になった SelectionKey
 	 */
 	private[this] def selected(key:SelectionKey):Unit = {
 		// *** catch exception and close individual connection only read or write
@@ -88,9 +246,8 @@ private[firestorm] class Dispatcher[T](id:String, readBufferSize:Int) extends Th
 
 			// read from channel
 			if (key.isReadable) {
-				val endpoint = key.attachment().asInstanceOf[EndpointImpl]
-				if(! endpoint.in.internalRead(readBuffer)){
-					EventLog.debug("connection reset by peer: %s".format(endpoint))
+				if(! key.in.internalRead(readBuffer)){
+					EventLog.debug("connection reset by peer: %s".format(sk2endpoint(key)))
 					closeSelectionKey(key)
 				}
 				return
@@ -98,8 +255,7 @@ private[firestorm] class Dispatcher[T](id:String, readBufferSize:Int) extends Th
 
 			// write to channel
 			if (key.isWritable) {
-				val endpoint = key.attachment().asInstanceOf[EndpointImpl]
-				endpoint.out.internalWrite()
+				key.out.internalWrite()
 				return
 			}
 
@@ -108,97 +264,43 @@ private[firestorm] class Dispatcher[T](id:String, readBufferSize:Int) extends Th
 				if (ex.isInstanceOf[ThreadDeath]){
 					throw ex
 				}
-				onError(key.attachment().asInstanceOf[Endpoint[T]], ex)
+				listeners.foreach { _.onError(key.attachment().asInstanceOf[Endpoint[_]], ex) }
 				closeSelectionKey(key)
 				return
 		}
 
 		// accept new connection (server behaviour)
 		if (key.isAcceptable) {
-			val socket = key.channel().asInstanceOf[ServerSocketChannel].accept()
-			EventLog.debug("\"%s\" accepts new connection from %s on port %d".format(
-				id,
-				socket.socket().getInetAddress.getHostAddress, socket.socket().getPort))
-			onAccept(socket)
-			join(socket)
+			val server = key.channel().asInstanceOf[ServerSocketChannel]
+			val client = server.accept()
+			listeners.foreach { _.onAccept(client) }
+			val endpoint = Endpoint[Any](this)
+			openSelectionKey(client, endpoint)
+			key.onAccept(endpoint)
+
+			// 初期状態で書き込みバッファは空だが初回に onDepartureBufferedOut を呼び出すために OP_WRITE を指定
+			endpoint.out.andThen{ None }
 		}
 	}
+
+	private[this] implicit def sk2endpoint(key:SelectionKey):Endpoint[_] = key.attachment().asInstanceOf[Endpoint[_]]
+	private[this] implicit def sk2server(key:SelectionKey):Server[Any] = key.attachment().asInstanceOf[Server[Any]]
+	private[this] implicit def sk2socket(key:SelectionKey):Socket = key.channel().asInstanceOf[SocketChannel].socket()
+	private[this] implicit def sk2ssocket(key:SelectionKey):ServerSocket = key.channel().asInstanceOf[ServerSocketChannel].socket()
+	private[this] implicit def sk2schannel(key:SelectionKey):ServerSocketChannel = key.channel.asInstanceOf[ServerSocketChannel]
 
 	/**
 	 * Join new client channel to this dispatcher.
 	 * @param channel new channel
 	 */
-	private[this] def join(channel:SocketChannel){
+	private[this] def openSelectionKey[T](channel:SocketChannel, endpoint:Endpoint[T]):Unit = {
 		channel.configureBlocking(false)
-		val selectionKey = channel.register(selector, SelectionKey.OP_READ)
-		val endpoint = new EndpointImpl(selectionKey)
-		selectionKey.attach(endpoint)
-		onOpen(endpoint)
-	}
+		val selectionKey = channel.register(selector, SelectionKey.OP_READ, endpoint)
+		endpoint.accept(selectionKey)
+		listeners.foreach { _.onOpen(endpoint) }
 
-	def onStartup():Unit = { }
-
-	def onShutdown():Unit = { }
-
-	def onAccept(channel:SocketChannel):Unit = { }
-
-	def onOpen(endpoint:Endpoint[T]):Unit = { }
-
-	def onClosing(endpoint:Endpoint[T]):Unit = { }
-
-	def onClosed(endpoint:Endpoint[T]):Unit = { }
-
-	def onRead(endpoint:Endpoint[T], length:Int):Unit = { }
-
-	def onWrite(endpoint:Endpoint[T], length:Int):Unit = { }
-
-	def onError(endpoint:Endpoint[T], ex:Throwable):Unit = { }
-
-	/**
-	 * Stop to accept new connection and request to close all processing connections.
-	 * @param waittime gracefully close in milliseconds
-	 */
-	def shutdown(waittime:Long):Unit = {
-
-		// stop to accept new connection
-		selector.keys().filter{ _.channel().isInstanceOf[ServerSocketChannel] }.foreach { key =>
-			key.cancel()
-			EventLog.debug("closing \"%s\" server channel %s on port %d".format(
-				id,
-				key.channel().asInstanceOf[ServerSocketChannel].socket().getInetAddress.getHostAddress,
-				key.channel().asInstanceOf[ServerSocketChannel].socket().getLocalPort
-			))
-			key.channel().close()
-		}
-
-		// request to close all sessions
-		selector.keys().filter{ ! _.channel().isInstanceOf[ServerSocketChannel] }.foreach { key =>
-			onClosing(key.attachment().asInstanceOf[Endpoint[T]])
-		}
-
-		// wait to gracefully close for all channels
-		val start = System.nanoTime()
-		while((System.nanoTime() - start) * 1000 * 1000 < waittime && selector.keys().size() > 0){
-			Thread.sleep(300)
-		}
-
-		// close all channels forcibly
-		selector.keys().foreach { key =>
-			closeSelectionKey(key)
-		}
-
-		if(Thread.currentThread().isDaemon){
-			EventLog.warn("shutdown is processing in daemon thread")
-			EventLog.warn("note that jvm will exit immediately in case it becomes only daemon threads by the end of this server")
-		}
-
-		// request to stop server thread
-		this.interrupt()
-		selector.wakeup()
-		this.join()
-
-		// close selector
-		selector.close()
+		//
+		endpoint.out.andThen { None }
 	}
 
 	/**
@@ -208,185 +310,52 @@ private[firestorm] class Dispatcher[T](id:String, readBufferSize:Int) extends Th
 	private[this] def closeSelectionKey(key:SelectionKey){
 		key.cancel()
 		key.channel().close()
-		if(key.attachment().isInstanceOf[Endpoint[T]]){
-			onClosing(key.attachment().asInstanceOf[Endpoint[T]])
+		if(key.attachment().isInstanceOf[Endpoint[_]]){
+			listeners.foreach { _.onClosing(key.attachment().asInstanceOf[Endpoint[Any]]) }
 		}
 	}
 
-	private[firestorm] class EndpointImpl(selectionKey:SelectionKey) extends Endpoint[T]{
+	this += new DispatcherListener {
+		override def onStartup():Unit = EventLog.info("[%s] startup dispatcher".format(id))
+		override def onShutdown():Unit = EventLog.info("[%s] shutdown dispatcher".format(id))
+		override def onError(ex:Throwable):Unit = EventLog.fatal(ex, "")
+		override def onError[T](endpoint:Endpoint[T], ex:Throwable):Unit
+			= EventLog.error(ex, "[%s] uncaught exception in endpoint %s".format(id, endpoint))
 
-		/**
-		 * I/O channel of this endpoint.
-		 */
-		val channel = selectionKey.channel().asInstanceOf[SocketChannel]
-
-		/**
-		 * Protocol specified session.
-		 */
-		var session:Option[T] = None
-
-		/**
-		 * Finish all pending writing buffer and close this endpoint.
-		 */
-		def close():Unit = {
-			EventLog.debug("closing connection by protocol")
-			channel.shutdownInput()
-			onClosing(this)
-			out.close()
-			onClosed(this)
+		override def onAccept(channel:SocketChannel):Unit = {
+			val socket = channel.socket()
+			EventLog.debug("[%s] accepts new connection from %s on port %d".format(
+				id, socket.getInetAddress.getHostAddress, socket.getPort))
 		}
+		override def onOpen[T](endpoint:Endpoint[T]):Unit = { }
+		override def onClosing[T](endpoint:Endpoint[T]):Unit = { }
+		override def onClosed[T](endpoint:Endpoint[T]):Unit = { }
+		override def onRead[T](endpoint:Endpoint[T], length:Int):Unit = { }
+		override def onWrite[T](endpoint:Endpoint[T], length:Int):Unit = { }
 
-		override def toString():String = {
-			"%s on port %d".format(
-				channel.socket().getInetAddress.getHostAddress, channel.socket().getPort)
-		}
-
-		val in = new ReadableStreamBuffer() {
-			val initialSize:Int = 4 * 1024
-			val factor:Double = 1.5
-
-			/**
-			 * Internal buffer that automatically expand. This is not overwritten for available data block
-			 * because these are shared by chunked ByteBuffer.
-			 */
-			private[this] var buffer = new Array[Byte](initialSize)
-
-			/**
-			 * Available data length in `buffer` from `consumed`.
-			 */
-			var available:Int = 0
-
-			/**
-			 * Available data offset from head of `buffer`.
-			 */
-			var consumed:Int = 0
-
-			/**
-			 * Available data length contained in this steam buffer.
-			 */
-			def length:Int = available
-
-			/**
-			 * Read from channel by use of specified buffer and append internal buffer, notify to receive
-			 * to protocol.
-			 * @param buffer commonly used read buffer
-			 * @return false if channel reaches end-of-stream
-			 */
-			def internalRead(buffer:ByteBuffer):Boolean = {
-				val length = channel.read(buffer)
-				if(length < 0){
-					false
-				} else {
-					if(length > 0){
-						buffer.flip()
-						append(buffer, length)
-						onRead(EndpointImpl.this, length)
-						buffer.clear()
-					}
-					true
-				}
-			}
-
-			def consume(trimmer:(Array[Byte], Int, Int)=>Int):Option[ByteBuffer] = synchronized{
-				val len = trimmer(buffer, consumed, available)
-				assert(len <= available)
-				if(len <= 0){
-					None
-				} else {
-					val buf = ByteBuffer.wrap(buffer, consumed, len)
-					consumed += len
-					available -= len
-					Some(buf)
-				}
-			}
-
-			private[this] def append(buf:ByteBuffer, length:Int):Unit = synchronized{
-
-				// expand internal buffer if remaining area is too small
-				if(buffer.length - consumed - available < buf.remaining()){
-					val newSize = math.max((available + buf.remaining()) * factor, initialSize).toInt
-					val temp = new Array[Byte](newSize)
-					System.arraycopy(buffer, consumed, temp, 0, available)
-					buffer = temp
-					consumed = 0
-				}
-
-				// append specified data to internal buffer
-				buf.get(buffer, consumed + available, length)
-				this.available += length
-			}
-
-		}
-
-		val out = new WritableStreamBuffer() {
-
-			/**
-			 * Flag to specify that write operation is invalid.
-			 */
-			private[this] var writeOperationClosed = false
-
-			var length = 0
-
-			/**
-			 * Write pending queue that may contain ByteBuffers or other operations.
-			 */
-			private[this] val writeQueue = new LinkedBlockingQueue[()=>Boolean](Int.MaxValue)
-
-			def andThen(callback: =>Unit):WritableStreamBuffer = writeQueue.synchronized {
-				if(writeOperationClosed){
-					throw new IOException("channel closed")
-				}
-				post {() =>
-					callback
-					true
-				}
-				this
-			}
-
-			def write(buffer:ByteBuffer):WritableStreamBuffer = writeQueue.synchronized {
-				if(writeOperationClosed){
-					throw new IOException("channel closed")
-				}
-				post {() =>
-					val len = channel.write(buffer)
-					length -= len
-					onWrite(EndpointImpl.this, len)
-					(buffer.remaining() == 0)
-				}
-				length += buffer.remaining()
-				this
-			}
-
-			def close():Unit = writeQueue.synchronized {
-				writeOperationClosed = true
-			}
-
-			private[this] def post(f:()=>Boolean){
-				writeQueue.put(f)
-				selectionKey.interestOps(selectionKey.interestOps() | SelectionKey.OP_WRITE)
-			}
-
-			/**
-			 * Write buffered data internally.
-			 * This take job from queue and execute it
-			 */
-			def internalWrite():Unit = writeQueue.synchronized {
-				val callback = writeQueue.peek()
-				if(callback()){
-					writeQueue.remove()
-					if(writeQueue.isEmpty){
-						if (writeOperationClosed){
-							selectionKey.cancel()
-							channel.close()
-							EventLog.debug("connection closed by protocol")
-						} else if(selectionKey.isValid){
-							selectionKey.interestOps(selectionKey.interestOps() & ~SelectionKey.OP_WRITE)
-						}
-					}
-				}
-			}
-
-		}
 	}
 
+}
+
+trait DispatcherListener {
+
+	def onStartup():Unit = { }
+
+	def onShutdown():Unit = { }
+
+	def onError(ex:Throwable):Unit = { }
+
+	def onAccept(channel:SocketChannel):Unit = { }
+
+	def onOpen[T](endpoint:Endpoint[T]):Unit = { }
+
+	def onClosing[T](endpoint:Endpoint[T]):Unit = { }
+
+	def onClosed[T](endpoint:Endpoint[T]):Unit = { }
+
+	def onRead[T](endpoint:Endpoint[T], length:Int):Unit = { }
+
+	def onWrite[T](endpoint:Endpoint[T], length:Int):Unit = { }
+
+	def onError[T](endpoint:Endpoint[T], ex:Throwable):Unit = { }
 }

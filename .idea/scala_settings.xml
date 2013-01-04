@@ -50,6 +50,8 @@
         <option value="scala.collection.mutable._" />
       </array>
     </option>
+    <option name="shift" value="100" />
+    <option name="showArgumentsToByNameParams" value="true" />
     <option name="sortImports" value="true" />
   </component>
 </project>
