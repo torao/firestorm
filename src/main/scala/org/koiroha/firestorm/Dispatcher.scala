@@ -244,19 +244,15 @@ class Dispatcher(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMill
 		// *** catch exception and close individual connection only read or write
 		try {
 
-			// read from channel
 			if (key.isReadable) {
+				// read from channel
 				if(! key.in.internalRead(readBuffer)){
 					EventLog.debug("connection reset by peer: %s".format(sk2endpoint(key)))
 					closeSelectionKey(key)
 				}
-				return
-			}
-
-			// write to channel
-			if (key.isWritable) {
+			} else if (key.isWritable) {
+				// write to channel
 				key.out.internalWrite()
-				return
 			}
 
 		} catch {

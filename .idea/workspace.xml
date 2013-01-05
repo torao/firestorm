@@ -14,7 +14,7 @@
     <file path="/a.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356450655486" ignored="false" />
     <file path="/a.xml" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356450666181" ignored="false" />
     <file path="/Config.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357026340261" ignored="false" />
-    <file path="/a.dummy" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357322197544" ignored="false" />
+    <file path="/a.dummy" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357341591811" ignored="false" />
     <file path="/Server.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357312393862" ignored="false" />
     <file path="/MessageQueue.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357026523581" ignored="false" />
     <file path="/State.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1356456012486" ignored="false" />
@@ -24,7 +24,7 @@
     <file path="/Session.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357136751426" ignored="false" />
     <file path="/EventLog.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357084005948" ignored="false" />
     <file path="/README.md" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357021493578" ignored="false" />
-    <file path="/fragment.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357318874095" ignored="false" />
+    <file path="/fragment.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357336951192" ignored="false" />
     <file path="/HttpServer.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357149966935" ignored="false" />
     <file path="/ServerBuilder.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357079653090" ignored="false" />
     <file path="/Http.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357136615364" ignored="false" />
@@ -106,12 +106,12 @@
     <file path="$PROJECT_DIR$/.m2/repository/org/apache/maven/maven-artifact-manager/2.0.6/maven-artifact-manager-2.0.6.pom" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357075021015" ignored="false" />
     <file path="/ServerConfig.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357208532105" ignored="false" />
     <file path="/StreamBuffer.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357124542209" ignored="false" />
-    <file path="/Endpoint.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357332835891" ignored="false" />
+    <file path="/Endpoint.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357344304911" ignored="false" />
     <file path="/Diagnostics.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357147513432" ignored="false" />
     <file path="/FirestormMBean.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357156573347" ignored="false" />
     <file path="/jmx.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357260757665" ignored="false" />
     <file path="/Transmit.java" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357154816427" ignored="false" />
-    <file path="/Dispatcher.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357322746902" ignored="false" />
+    <file path="/Dispatcher.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357346934076" ignored="false" />
     <file path="/echo.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357218853419" ignored="false" />
     <file path="/EchoServer.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357217956421" ignored="false" />
     <file path="/Scala Console" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357236209140" ignored="false" />
@@ -119,7 +119,7 @@
     <file path="/Client.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357241451935" ignored="false" />
     <file path="/EchoClient.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357221493402" ignored="false" />
     <file path="/Context.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357242682618" ignored="false" />
-    <file path="/EchoTest.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357333807331" ignored="false" />
+    <file path="/EchoTest.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357347880492" ignored="false" />
     <file path="/DispatcherMXBean.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357313130215" ignored="false" />
     <file path="/History.scala" changelist="29fad5d1-abb3-46c8-a3ad-c3d1cd85eeb7" time="1357298493466" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -184,7 +184,7 @@
       <file leaf-file-name="Dispatcher.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Dispatcher.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="301" column="6" selection-start="8377" selection-end="8377" vertical-scroll-proportion="0.0">
+            <state line="242" column="0" selection-start="6298" selection-end="6298" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#202#228#0" expanded="true" />
@@ -196,7 +196,7 @@
       <file leaf-file-name="Endpoint.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Endpoint.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="0" selection-start="3980" selection-end="3980" vertical-scroll-proportion="0.0">
+            <state line="160" column="43" selection-start="4416" selection-end="4416" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#224#250#0" expanded="true" />
@@ -229,7 +229,7 @@
       <file leaf-file-name="EchoTest.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/EchoTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="31" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.4034417">
+            <state line="56" column="36" selection-start="1583" selection-end="1583" vertical-scroll-proportion="1.2906309">
               <folding>
                 <element signature="e#209#268#0" expanded="true" />
               </folding>
@@ -978,13 +978,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/src.zip!/java/net/SocketInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="23" selection-start="2310" selection-end="2310" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/jre/lib/rt.jar!/sun/nio/ch/NativeThread.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="1" selection-start="304" selection-end="304" vertical-scroll-proportion="0.37284896">
@@ -1075,9 +1068,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/src.zip!/java/nio/ByteBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="390" column="29" selection-start="12586" selection-end="12586" vertical-scroll-proportion="1.1357553">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Dispatcher.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="6" selection-start="8377" selection-end="8377" vertical-scroll-proportion="0.0">
+        <state line="242" column="0" selection-start="6298" selection-end="6298" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#202#228#0" expanded="true" />
@@ -1087,7 +1087,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/Endpoint.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="0" selection-start="3980" selection-end="3980" vertical-scroll-proportion="0.0">
+        <state line="160" column="43" selection-start="4416" selection-end="4416" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#224#250#0" expanded="true" />
@@ -1097,7 +1097,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/koiroha/firestorm/server/EchoTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="31" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.4034417">
+        <state line="56" column="36" selection-start="1583" selection-end="1583" vertical-scroll-proportion="1.2906309">
           <folding>
             <element signature="e#209#268#0" expanded="true" />
           </folding>

@@ -19,7 +19,7 @@ case class Endpoint[T](dispatcher:Dispatcher){
 
 	private[this] var selectionKey:Option[SelectionKey] = None
 
-	var session:Option[T] = None
+	var state:Option[T] = None
 
 	override def toString():String = selectionKey match {
 		case Some(key) =>
@@ -94,23 +94,16 @@ case class Endpoint[T](dispatcher:Dispatcher){
 		/**
 		 * Internal buffer that automatically expand. This is not overwritten for available data block
 		 * because these are shared by chunked ByteBuffer.
+		 * position() is offset
+		 * limit() - position() is available length
 		 */
-		private[this] var buffer = new Array[Byte](initialSize)
-
-		/**
-		 * Available data length in `buffer` from `consumed`.
-		 */
-		var available:Int = 0
-
-		/**
-		 * Available data offset from head of `buffer`.
-		 */
-		var consumed:Int = 0
+		private[this] var buffer = ByteBuffer.allocate(initialSize)
+		buffer.limit(0)
 
 		/**
 		 * Available data length contained in this steam buffer.
 		 */
-		def length:Int = available
+		def length:Int = buffer.limit()
 
 		/**
 		 * Read from channel by use of specified buffer and append internal buffer, notify to receive
@@ -134,14 +127,14 @@ case class Endpoint[T](dispatcher:Dispatcher){
 			}
 		}
 
-		def consume(trimmer:(Array[Byte], Int, Int)=>Int):Option[ByteBuffer] = synchronized{
-			val len = trimmer(buffer, consumed, available)
-			if(len <= 0 || len > available){
+		def consume(trimmer:(ByteBuffer)=>Int):Option[ByteBuffer] = synchronized{
+			val len = trimmer(buffer.asReadOnlyBuffer())
+			if(len <= 0 || len >= buffer.limit()){
 				None
 			} else {
-				val buf = ByteBuffer.wrap(buffer, consumed, len)
-				consumed += len
-				available -= len
+				val buf = buffer.duplicate().asReadOnlyBuffer()
+				buf.limit(buf.position() + len)
+				buffer.position(buffer.position() + len)
 				Some(buf)
 			}
 		}
@@ -149,17 +142,27 @@ case class Endpoint[T](dispatcher:Dispatcher){
 		private[this] def append(buf:ByteBuffer, length:Int):Unit = synchronized{
 
 			// expand internal buffer if remaining area is too small
-			if(buffer.length - consumed - available < buf.remaining()){
-				val newSize = math.max((available + buf.remaining()) * factor, initialSize).toInt
-				val temp = new Array[Byte](newSize)
-				System.arraycopy(buffer, consumed, temp, 0, available)
-				buffer = temp
-				consumed = 0
+			if(buffer.capacity() - buffer.limit() < buf.remaining()){
+				val baseSize = buffer.remaining() + buf.remaining()
+				if (baseSize > maxReadPendingBufferSize){
+					throw new IOException("read pending buffer overflow: (%d + %d) > %d"
+						.format(buffer.remaining(), buf.remaining(), maxReadPendingBufferSize))
+				}
+				val newSize = math.max(baseSize * factor, initialSize).toInt
+				val newBuffer = ByteBuffer.allocate(newSize)
+				newBuffer.put(buffer)
+				newBuffer.put(buf)
+				newBuffer.flip()
+				buffer = newBuffer
 			}
 
-			// append specified data to internal buffer
-			buf.get(buffer, consumed + available, length)
-			this.available += length
+			val limit = buffer.limit()
+			val pos = buffer.position()
+			buffer.limit(limit + buf.remaining())
+			buffer.position(limit)
+			buffer.put(buf)
+			buffer.position(pos)
+			buffer.toString
 		}
 
 	}
@@ -198,9 +201,14 @@ case class Endpoint[T](dispatcher:Dispatcher){
 				throw new IOException("channel closed")
 			}
 			if(buffer.remaining() > 0){
-				if(length + buffer.remaining() > maxWriteBufferSize){
-					throw new IOException("write buffer overflow")
+
+				// 書き込みを待っているデータの総サイズが限界値を超えたら例外
+				if(length + buffer.remaining() > maxWritePendingBufferSize){
+					throw new IOException(
+						"write pending buffer size overflow: %d + %d > %d; this may slow network"
+							.format(length, buffer.remaining(), maxWritePendingBufferSize))
 				}
+
 				post {() =>
 					val len = channel.write(buffer)
 					length -= len
@@ -282,6 +290,12 @@ case class Endpoint[T](dispatcher:Dispatcher){
 trait ReadableStreamBuffer {
 
 	/**
+	 * バッファリングされるデータの最大バイト数。出力バッファにこれより大きいデータを投入しようとした場合、
+	 * `write()` 操作で `IOException` が発生します。
+	 */
+	var maxReadPendingBufferSize = 64 * 1024 * 1024
+
+	/**
 	 * buffered read-data length.
 	 */
 	def length:Int
@@ -293,7 +307,7 @@ trait ReadableStreamBuffer {
 	 * @param trimmer
 	 * @return Some(ByteBuffer) if closure return available length, or None if 0 returned
 	 */
-	def consume(trimmer:(Array[Byte], Int, Int)=>Int):Option[ByteBuffer]
+	def consume(trimmer:(ByteBuffer)=>Int):Option[ByteBuffer]
 }
 
 trait WritableStreamBuffer {
@@ -302,7 +316,7 @@ trait WritableStreamBuffer {
 	 * バッファリングされるデータの最大バイト数。出力バッファにこれより大きいデータを投入しようとした場合、
 	 * `write()` 操作で `IOException` が発生します。
 	 */
-	var maxWriteBufferSize = 1 * 1024 * 1024
+	var maxWritePendingBufferSize = 64 * 1024 * 1024
 
 	def write(buffer:Array[Byte]):WritableStreamBuffer = {
 		write(buffer, 0, buffer.length)

@@ -8,6 +8,15 @@ package org.koiroha.firestorm.server
 
 import org.koiroha.firestorm.{Endpoint, Server, Dispatcher}
 import java.nio.ByteBuffer
+import com.twitter.finagle.{Codec, CodecFactory, Service}
+import com.twitter.util.{ Future}
+import com.twitter.finagle.builder.ServerBuilder
+import java.net.{ServerSocket, InetSocketAddress}
+import org.jboss.netty.channel.{Channels, ChannelPipelineFactory}
+import org.jboss.netty.handler.codec.string.{StringEncoder, StringDecoder}
+import org.jboss.netty.util.CharsetUtil
+import org.jboss.netty.handler.codec.frame.{DelimiterBasedFrameDecoder, Delimiters}
+import java.lang.String
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,49 +26,141 @@ import java.nio.ByteBuffer
  * To change this template use File | Settings | File Templates.
  */
 object EchoTest {
+	val port = 5007
+
 	def main(args:Array[String]):Unit = {
+//		streamEchoServer()
+		finagleEchoServer()
+//		firestormEchoSever()
+		firestormEchoClient()
+	}
 
-		val dispatcher1 = new Dispatcher("echo-server")
-		val dispatcher2 = new Dispatcher("echo-client")
-
-		val server = Server[Int](dispatcher1).onAccept { (_, ep) =>
-			printf("S: onAccept()%n")
-			ep.onArrivalBufferedIn { e =>
-				e.in.consume { (_,_,length) => 4 } match {
-					case Some(buffer) =>
-						val value = buffer.getInt
-						if (value != e.session.getOrElse(0)){
-							throw new Exception("値が違います: %d != %d".format(value, e.session.getOrElse(0)))
-						}
-						e.session = Some(value + 1)
-						buffer.position(buffer.position() - 4)
-						e.out.write(buffer)
-					case None => None
-				}
+	def encode(i:Int):ByteBuffer = {
+		ByteBuffer.wrap("%d\n".format(i).getBytes())
+	}
+	def decode(b:ByteBuffer):Int = {
+		val b1 = new Array[Byte](b.remaining())
+		b.get(b1)
+		new String(b1, 0, b1.length - 1).toInt
+	}
+	def detect(b:ByteBuffer):Int = {
+		for (i <- b.position() until b.limit()){
+			if (b.get(i) == '\n'){
+				return i - b.position() + 1
 			}
-		}.listen(5007)
+		}
+		0
+	}
 
-		val buffer = ByteBuffer.wrap(("hello, world" * 1).getBytes).asReadOnlyBuffer()
-		val endpoints = for (i <- 1 to 1) yield {
-			Endpoint[Int](dispatcher2).onConnect { ep =>
-				printf("C: onConnect()%n")
+	def firestormEchoClient(){
+		val dispatcher = new Dispatcher("echo-client")
+		val endpoints = for (i <- 1 to 100) yield {
+			Endpoint[Int](dispatcher).onConnect { ep =>
+//				printf("C: onConnect()%n")
 			}.onArrivalBufferedIn { ep =>
-				ep.in.consume { (_,_,length) => 4 } match {
+				ep.in.consume { (buffer) => detect(buffer) } match {
 					case Some(buffer) =>
-						val value = buffer.getInt
-						if ((value % 10000) == 0){
-							printf("C: onArrivalBufferIn(%d)%n", value)
-						}
+						val value = decode(buffer)
+//						if ((value % 10000) == 0){
+//							printf("C: onArrivalBufferIn(%d)%n", value)
+//						}
 					case None => None
 				}
 			}.onDepartureBufferedOut { ep =>
-//				printf("C: onDepartureBufferOut()%n")
-				val buf = ByteBuffer.allocate(4).putInt(ep.session.getOrElse(0))
-				buf.flip()
-				ep.out.write(buf)
-				ep.session = Some(ep.session.getOrElse(0) + 1)
-			}.connect("localhost", 5007)
+				ep.out.write(encode(ep.state.getOrElse(0)))
+				ep.state = Some(ep.state.getOrElse(0) + 1)
+			}.connect("localhost", port)
 		}
 	}
 
+	def firestormEchoSever(){
+		val dispatcher1 = new Dispatcher("echo-server")
+		val server = Server[Int](dispatcher1).onAccept { (_, ep) =>
+			printf("S: onAccept()%n")
+			ep.onArrivalBufferedIn { e =>
+				ep.in.consume { (buffer) => detect(buffer) } match {
+					case Some(buffer) =>
+						val value = decode(buffer)
+						if (value != e.state.getOrElse(0)){
+							throw new Exception("値が違います: %d != %d".format(value, e.state.getOrElse(0)))
+						}
+						e.state = Some(value + 1)
+						e.out.write(encode(value))
+					case None => None
+				}
+			}
+		}.listen(port)
+	}
+
+	def streamEchoServer(){
+		new Thread(){
+			override def run(){
+				val s = new ServerSocket(port)
+				while(true){
+					val c = s.accept()
+					new Thread(){
+						override def run(){
+							val b = new Array[Byte](1024)
+							val in = c.getInputStream
+							val out = c.getOutputStream
+							while(true){
+								val len = in.read(b)
+								out.write(b, 0, len)
+							}
+						}
+					}.start()
+				}
+			}
+		}.start()
+	}
+
+	def finagleEchoServer(){
+		/**
+		 * A very simple service that simply echos its request back
+		 * as a response. Note that it returns a Future, since everything
+		 * in Finagle is asynchronous.
+		 */
+		val service = new Service[String, String] {
+			def apply(request: String) = Future.value(request)
+		}
+
+		// Bind the service to port 8080
+		ServerBuilder()
+			.codec(StringCodec)
+			.bindTo(new InetSocketAddress(port))
+			.name("echoserver")
+			.build(service)
+	}
+
+	object StringCodec extends StringCodec
+
+	class StringCodec extends CodecFactory[String, String] {
+		def server = Function.const {
+			new Codec[String, String] {
+				def pipelineFactory = new ChannelPipelineFactory {
+					def getPipeline = {
+						val pipeline = Channels.pipeline()
+						pipeline.addLast("line",
+							new DelimiterBasedFrameDecoder(100, Delimiters.lineDelimiter: _*))
+						pipeline.addLast("stringDecoder", new StringDecoder(CharsetUtil.UTF_8))
+						pipeline.addLast("stringEncoder", new StringEncoder(CharsetUtil.UTF_8))
+						pipeline
+					}
+				}
+			}
+		}
+
+		def client = Function.const {
+			new Codec[String, String] {
+				def pipelineFactory = new ChannelPipelineFactory {
+					def getPipeline = {
+						val pipeline = Channels.pipeline()
+						pipeline.addLast("stringEncode", new StringEncoder(CharsetUtil.UTF_8))
+						pipeline.addLast("stringDecode", new StringDecoder(CharsetUtil.UTF_8))
+						pipeline
+					}
+				}
+			}
+		}
+	}
 }
