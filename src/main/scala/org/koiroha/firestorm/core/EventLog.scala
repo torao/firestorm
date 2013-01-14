@@ -4,13 +4,13 @@
  * org.koiroha.firestorm.http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-package org.koiroha.firestorm
+package org.koiroha.firestorm.core
 
+import java.io.{PrintWriter, StringWriter}
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.logging._
 import scala.collection.JavaConversions._
-import java.io.{PrintWriter, StringWriter}
 
 object EventLog {
 	val FATAL = 0

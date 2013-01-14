@@ -1,7 +1,7 @@
 Firestorm
 =========
-Firestorm is robust and scalable network-stack framework for asynchronous message distribution and interactive remote
-procedure call.
+Firestorm is robust and scalable network-stack framework for asynchronous message distribution and
+interactive remote procedure call.
 
 License
 -------

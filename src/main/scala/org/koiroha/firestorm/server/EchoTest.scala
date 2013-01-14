@@ -6,7 +6,6 @@
 
 package org.koiroha.firestorm.server
 
-import org.koiroha.firestorm.{Endpoint, Server, Dispatcher}
 import java.nio.ByteBuffer
 import com.twitter.finagle.{Codec, CodecFactory, Service}
 import com.twitter.util.{ Future}
@@ -17,6 +16,7 @@ import org.jboss.netty.handler.codec.string.{StringEncoder, StringDecoder}
 import org.jboss.netty.util.CharsetUtil
 import org.jboss.netty.handler.codec.frame.{DelimiterBasedFrameDecoder, Delimiters}
 import java.lang.String
+import org.koiroha.firestorm.core.{Server, Endpoint, Context}
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,8 +30,8 @@ object EchoTest {
 
 	def main(args:Array[String]):Unit = {
 //		streamEchoServer()
-		finagleEchoServer()
-//		firestormEchoSever()
+//		finagleEchoServer()
+		firestormEchoSever()
 		firestormEchoClient()
 	}
 
@@ -53,17 +53,13 @@ object EchoTest {
 	}
 
 	def firestormEchoClient(){
-		val dispatcher = new Dispatcher("echo-client")
+		val dispatcher = new Context("echo-client")
 		val endpoints = for (i <- 1 to 100) yield {
 			Endpoint[Int](dispatcher).onConnect { ep =>
-//				printf("C: onConnect()%n")
 			}.onArrivalBufferedIn { ep =>
-				ep.in.consume { (buffer) => detect(buffer) } match {
+				ep.in.slice { (buffer) => detect(buffer) } match {
 					case Some(buffer) =>
 						val value = decode(buffer)
-//						if ((value % 10000) == 0){
-//							printf("C: onArrivalBufferIn(%d)%n", value)
-//						}
 					case None => None
 				}
 			}.onDepartureBufferedOut { ep =>
@@ -74,11 +70,11 @@ object EchoTest {
 	}
 
 	def firestormEchoSever(){
-		val dispatcher1 = new Dispatcher("echo-server")
+		val dispatcher1 = new Context("echo-server")
 		val server = Server[Int](dispatcher1).onAccept { (_, ep) =>
 			printf("S: onAccept()%n")
 			ep.onArrivalBufferedIn { e =>
-				ep.in.consume { (buffer) => detect(buffer) } match {
+				ep.in.slice { (buffer) => detect(buffer) } match {
 					case Some(buffer) =>
 						val value = decode(buffer)
 						if (value != e.state.getOrElse(0)){
