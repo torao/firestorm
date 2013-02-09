@@ -7,13 +7,11 @@
 package org.koiroha.firestorm.server
 
 import java.nio.ByteBuffer
+import java.net.{ServerSocket, InetSocketAddress}
 import com.twitter.finagle.{Codec, CodecFactory, Service}
 import com.twitter.util.{ Future}
-import com.twitter.finagle.builder.ServerBuilder
-import java.net.{ServerSocket, InetSocketAddress}
 import org.jboss.netty.channel.{Channels, ChannelPipelineFactory}
 import org.jboss.netty.handler.codec.string.{StringEncoder, StringDecoder}
-import org.jboss.netty.util.CharsetUtil
 import org.jboss.netty.handler.codec.frame.{DelimiterBasedFrameDecoder, Delimiters}
 import java.lang.String
 import org.koiroha.firestorm.core.{Server, Endpoint, Context}

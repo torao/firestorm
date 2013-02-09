@@ -17,15 +17,17 @@ import java.util.concurrent.LinkedBlockingQueue
  *
  * {{{
  *   val context = new Context()
- *   val e1 = Endpoint[Any](context)
+ *   val e1 = Endpoint(context)
  *    .onArrivalBufferedIn { e => ... }
  *    .onDepartureBufferedOut { e => ... }
  *    .connect("www.foo.com", 80)
  * }}}
  * コンストラクタでこの Endpoint が使用する `Context` と結びつけ、各種のイベントハンドラを定義し最後に接続を
- * 行います (イベントハンドラは接続後に再定義することもできます)。
+ * 行います (イベントハンドラは任意のタイミングで追加削除することもできます)。
+ *
+ * エンドポイントに関連付けた変数が必要な場合はローカル変数をイベントハンドラで束縛します。
  */
-case class Endpoint[T](dispatcher:Context){
+case class Endpoint(dispatcher:Context){
 
 	/**
 	 * この Endpoint の入力ストリームバッファです。
@@ -45,11 +47,6 @@ case class Endpoint[T](dispatcher:Context){
 	private[this] var selectionKey:Option[SelectionKey] = None
 
 	/**
-	 * このエンドポイントに関連づけられたアプリケーション定義の状態を保持するための変数です。
-	 */
-	var state:Option[T] = None
-
-	/**
 	 * このインスタンスを文字列として参照します。
 	 * @return インスタンスの文字列表現
 	 */
@@ -66,14 +63,14 @@ case class Endpoint[T](dispatcher:Context){
 	 * @param port 接続先のポート番号
 	 * @return 接続したエンドポイント
 	 */
-	def connect(hostname:String, port:Int):Endpoint[T] = connect(new InetSocketAddress(hostname, port))
+	def connect(hostname:String, port:Int):Endpoint = connect(new InetSocketAddress(hostname, port))
 
 	/**
 	 * このエンドポイントのコンテキストを使用して指定されたアドレスへ接続します。
 	 * @param address 接続先のアドレス
 	 * @return 接続したエンドポイント
 	 */
-	def connect(address:SocketAddress):Endpoint[T] = synchronized {
+	def connect(address:SocketAddress):Endpoint = synchronized {
 		selectionKey match {
 			case Some(k) =>
 				if(k.channel().asInstanceOf[SocketChannel].isOpen) {
@@ -374,12 +371,17 @@ case class Endpoint[T](dispatcher:Context){
 	}
 
 	class Handler private[core] () {
-		private var handler:Option[(Endpoint[T])=>Unit] = None
-		def apply(f:(Endpoint[T])=>Unit):Endpoint[T] = {
-			handler = Some(f)
+		private var handlers = List[(Endpoint)=>Unit]()
+		def apply(f:(Endpoint)=>Unit):Endpoint = attach(f)
+		def attach(f:(Endpoint)=>Unit):Endpoint = {
+			handlers ::= f
 			Endpoint.this
 		}
-		private[core] def apply():Unit = handler.foreach { _(Endpoint.this) }
+		def detach(f:(Endpoint)=>Unit):Endpoint = {
+			handlers = handlers.filter{ _ != f }
+			Endpoint.this
+		}
+		private[core] def apply():Unit = handlers.foreach { _(Endpoint.this) }
 	}
 
 	/**
@@ -394,8 +396,6 @@ case class Endpoint[T](dispatcher:Context){
 
 	/**
 	 * この Endpoint に読み出し可能なデータが到着したときに実行する処理を指定します。
-	 * @param f
-	 * @return
 	 */
 	val onArrivalBufferedIn = new Handler()
 

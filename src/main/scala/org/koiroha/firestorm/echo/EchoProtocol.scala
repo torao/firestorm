@@ -8,15 +8,15 @@ package org.koiroha.firestorm.echo
 
 import org.koiroha.firestorm.core.{Server, Context, Endpoint}
 
-class EchoServer(context:Context) extends org.koiroha.firestorm.core.Server[Nothing](context) {
+class EchoServer(context:Context) extends org.koiroha.firestorm.core.Server(context) {
 	onAccept(EchoProtocol.accept)
 }
 
-class EchoClient(context:Context) extends Endpoint[Nothing](context){
+class EchoClient(context:Context) extends Endpoint(context){
 }
 
 object EchoProtocol {
-	def accept[T](server:Server[T], endpoint:Endpoint[T]){
+	def accept(server:Server, endpoint:Endpoint){
 		endpoint.onArrivalBufferedIn { e =>
 			val buffer = e.in.slice{ _.remaining() }
 			e.out.write(buffer.get)

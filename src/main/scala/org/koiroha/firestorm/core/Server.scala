@@ -13,12 +13,12 @@ import java.nio.channels.{SocketChannel, ServerSocketChannel, SelectionKey}
  * 指定されたコンテキスト上でサービスを行うサーバを構築します。
  * @param context コンテキスト
  */
-case class Server[T](context:Context) {
+case class Server(context:Context) {
 
 	private[this] var selectionKey:Option[SelectionKey] = None
-	private[this] var accept:Option[(Server[T], Endpoint[T])=>Unit] = None
+	private[this] var accept:Option[(Server, Endpoint)=>Unit] = None
 
-	private[core] def onAccept(endpoint:Endpoint[T]):Unit = {
+	private[core] def onAccept(endpoint:Endpoint):Unit = {
 		accept.foreach{ _(this, endpoint) }
 	}
 
@@ -42,7 +42,7 @@ case class Server[T](context:Context) {
 	 * @param f Accept 時の処理
 	 * @return
 	 */
-	def onAccept(f:(Server[T], Endpoint[T])=>Unit):Server[T] = {
+	def onAccept(f:(Server, Endpoint)=>Unit):Server = {
 		accept = Option(f)
 		this
 	}
@@ -51,14 +51,14 @@ case class Server[T](context:Context) {
 	 * 指定されたポート上で Listen するサーバを構築します。
 	 * @param port
 	 */
-	def listen(port:Int):Server[T] = listen(new InetSocketAddress(port), -1)
+	def listen(port:Int):Server = listen(new InetSocketAddress(port), -1)
 
 	/**
 	 * 指定されたアドレス上で Listen するサーバを構築します。
 	 * @param local
 	 * @param backlog
 	 */
-	def listen(local:SocketAddress, backlog:Int):Server[T] = synchronized{
+	def listen(local:SocketAddress, backlog:Int):Server = synchronized{
 		if (selectionKey.isDefined){
 			throw new IllegalStateException("server already listening")
 		}

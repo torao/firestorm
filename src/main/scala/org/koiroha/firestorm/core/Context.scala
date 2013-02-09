@@ -64,7 +64,7 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 	 * @param channel バインドするチャネル
 	 * @return 接続したエンドポイント
 	 */
-	private[firestorm] def bind[T](channel:SocketChannel, endpoint:Endpoint[T]) = {
+	private[firestorm] def bind(channel:SocketChannel, endpoint:Endpoint) = {
 		execInDispatcherThread{ () => openSelectionKey(channel, endpoint) }
 	}
 
@@ -72,7 +72,7 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 	 * 接続済みの ServerSocket チャネルをこのコンテキストにバインドします。
 	 * @param channel バインドするチャネル
 	 */
-	private[firestorm] def bind[T](channel:ServerSocketChannel, server:Server[T]):SelectionKey = {
+	private[firestorm] def bind(channel:ServerSocketChannel, server:Server):SelectionKey = {
 		execInDispatcherThread { () =>
 			channel.configureBlocking(false)
 			channel.register(selector, SelectionKey.OP_ACCEPT, server)
@@ -124,9 +124,9 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 
 			// すべての Endpoint に対して shutdown 要求を実行
 			selector.keys().filter{
-				_.attachment().isInstanceOf[Endpoint[_]]
+				_.attachment().isInstanceOf[Endpoint]
 			}.map{
-				_.attachment().asInstanceOf[Endpoint[_]]
+				_.attachment().asInstanceOf[Endpoint]
 			}.foreach { e =>
 				e.onShutdown()
 				e.close()
@@ -270,8 +270,8 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 	 * 単一の SelectionKey を処理します。
 	 * @param key 入出力可能になった SelectionKey
 	 */
-	private[this] def selected[T](key:SelectionKey):Unit = key.attachment() match {
-		case e:Endpoint[T] =>
+	private[this] def selected(key:SelectionKey):Unit = key.attachment() match {
+		case e:Endpoint =>
 			// *** catch exception and close individual connection only read or write
 			try {
 
@@ -297,13 +297,13 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 					closeSelectionKey(key)
 			}
 
-		case s:Server[T] =>
+		case s:Server =>
 			// setSelectionKey new connection (server behaviour)
 			if (key.isAcceptable) {
 				val server = key.channel().asInstanceOf[ServerSocketChannel]
 				val client = server.accept()
 				eachListener { _.onAccept(client) }
-				val endpoint = Endpoint[Any](this)
+				val endpoint = Endpoint(this)
 				openSelectionKey(client, endpoint)
 				key.onAccept(endpoint)
 
@@ -312,8 +312,8 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 			}
 	}
 
-	private[this] implicit def sk2endpoint(key:SelectionKey):Endpoint[_] = key.attachment().asInstanceOf[Endpoint[_]]
-	private[this] implicit def sk2server(key:SelectionKey):Server[Any] = key.attachment().asInstanceOf[Server[Any]]
+	private[this] implicit def sk2endpoint(key:SelectionKey):Endpoint = key.attachment().asInstanceOf[Endpoint]
+	private[this] implicit def sk2server(key:SelectionKey):Server = key.attachment().asInstanceOf[Server]
 	private[this] implicit def sk2socket(key:SelectionKey):Socket = key.channel().asInstanceOf[SocketChannel].socket()
 	private[this] implicit def sk2ssocket(key:SelectionKey):ServerSocket = {
 		key.channel().asInstanceOf[ServerSocketChannel].socket()
@@ -326,7 +326,7 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 	 * Join new client channel to this context.
 	 * @param channel new channel
 	 */
-	private[this] def openSelectionKey[T](channel:SocketChannel, endpoint:Endpoint[T]):Unit = {
+	private[this] def openSelectionKey(channel:SocketChannel, endpoint:Endpoint):Unit = {
 		channel.configureBlocking(false)
 		val selectionKey = channel.register(selector, SelectionKey.OP_READ, endpoint)
 		endpoint.setSelectionKey(selectionKey)
@@ -343,8 +343,8 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 	private[this] def closeSelectionKey(key:SelectionKey){
 		key.cancel()
 		key.channel().close()
-		if(key.attachment().isInstanceOf[Endpoint[_]]){
-			listeners.foreach { _.onClosing(key.attachment().asInstanceOf[Endpoint[Any]]) }
+		if(key.attachment().isInstanceOf[Endpoint]){
+			listeners.foreach { _.onClosing(key.attachment().asInstanceOf[Endpoint]) }
 		}
 	}
 
@@ -352,10 +352,10 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 	this += new Context.Listener {
 		override def onShutdown():Unit = EventLog.info("[%s] shutdown context".format(id))
 		override def onError(ex:Throwable):Unit = EventLog.fatal(ex, "")
-		override def onError[T](endpoint:Endpoint[T], ex:Throwable):Unit
+		override def onError(endpoint:Endpoint, ex:Throwable):Unit
 			= EventLog.error(ex, "[%s] uncaught exception in endpoint %s".format(id, endpoint))
 
-		override def onListen[T](server:Server[T]):Unit = {
+		override def onListen(server:Server):Unit = {
 			EventLog.debug("[%s] listenining on %s port %d".format(id,
 				server.address.get.getAddress.getHostAddress,
 				server.address.get.getPort))
@@ -365,11 +365,11 @@ class Context(val id:String, readBufferSize:Int = 8 * 1024, var maxIdleInMillis:
 			EventLog.debug("[%s] accepts new connection from %s on port %d".format(
 				id, socket.getInetAddress.getHostAddress, socket.getPort))
 		}
-		override def onOpen[T](endpoint:Endpoint[T]):Unit = { }
-		override def onClosing[T](endpoint:Endpoint[T]):Unit = { }
-		override def onClosed[T](endpoint:Endpoint[T]):Unit = { }
-		override def onRead[T](endpoint:Endpoint[T], length:Int):Unit = { }
-		override def onWrite[T](endpoint:Endpoint[T], length:Int):Unit = { }
+		override def onOpen(endpoint:Endpoint):Unit = { }
+		override def onClosing(endpoint:Endpoint):Unit = { }
+		override def onClosed(endpoint:Endpoint):Unit = { }
+		override def onRead(endpoint:Endpoint, length:Int):Unit = { }
+		override def onWrite(endpoint:Endpoint, length:Int):Unit = { }
 
 	}
 
@@ -399,7 +399,7 @@ object Context {
 		 * @param endpoint 例外の発生したエンドポイント
 		 * @param ex 発生した例外
 		 */
-		def onError[T](endpoint:Endpoint[T], ex:Throwable):Unit = { }
+		def onError(endpoint:Endpoint, ex:Throwable):Unit = { }
 
 		/**
 		 * このコンテキスト内の ServerSocketChannel が新しい接続を受け付けたときに呼び出されます。
@@ -411,45 +411,45 @@ object Context {
 		 * このコンテキストでサーバが Listen を開始したときに呼び出されます。
 		 * @param server Listen を開始したサーバ
 		 */
-		def onListen[T](server:Server[T]):Unit = { }
+		def onListen(server:Server):Unit = { }
 
 		/**
 		 * このコンテキスト上のサーバが Listen を終了したときに呼び出されます。
 		 * @param server Listen を終了したサーバ
 		 */
-		def onUnlisten[T](server:Server[T]):Unit = { }
+		def onUnlisten(server:Server):Unit = { }
 
 		/**
 		 * このコンテキストに新しいエンドポイントが参加した時に呼び出されます。
 		 * @param endpoint 新しく参加したエンドポイント
 		 */
-		def onOpen[T](endpoint:Endpoint[T]):Unit = { }
+		def onOpen(endpoint:Endpoint):Unit = { }
 
 		/**
 		 * 指定されたエンドポイントがクローズされようとしている時に呼び出されます。
 		 * @param endpoint クローズ使用としているエンドポイント
 		 */
-		def onClosing[T](endpoint:Endpoint[T]):Unit = { }
+		def onClosing(endpoint:Endpoint):Unit = { }
 
 		/**
 		 * 指定されたエンドポイントがクローズされたときに呼び出されます。
 		 * @param endpoint クローズされたエンドポイント
 		 */
-		def onClosed[T](endpoint:Endpoint[T]):Unit = { }
+		def onClosed(endpoint:Endpoint):Unit = { }
 
 		/**
 		 * 指定されたエンドポイント上でデータが読み出された時に呼び出されます。
 		 * @param endpoint データの読み出されたエンドポイント
 		 * @param length 読み出されたデータのバイト長
 		 */
-		def onRead[T](endpoint:Endpoint[T], length:Int):Unit = { }
+		def onRead(endpoint:Endpoint, length:Int):Unit = { }
 
 		/**
 		 * 指定されたエンドポイント上でデータが書き込まれたときに呼び出されます。
 		 * @param endpoint データの書き出されたエンドポイント
 		 * @param length 書き出されたデータのバイト長
 		 */
-		def onWrite[T](endpoint:Endpoint[T], length:Int):Unit = { }
+		def onWrite(endpoint:Endpoint, length:Int):Unit = { }
 
 	}
 }

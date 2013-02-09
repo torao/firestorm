@@ -35,28 +35,28 @@ class ContextMXBeanImpl(context:Context) extends ContextMXBean with Monitor {
 	private[this] var serverCount = 0
 	private[this] var endpointCount = 0
 	private[this] val listener = new Context.Listener(){
-		override def onListen[T](server:Server[T]):Unit = {
+		override def onListen(server:Server):Unit = {
 			serverCount += 1
 		}
-		override def onUnlisten[T](server:Server[T]):Unit = {
+		override def onUnlisten(server:Server):Unit = {
 			serverCount -= 1
 		}
 		override def onAccept(channel:SocketChannel):Unit = {
 			select.current.value += 1
 			accept.current.value += 1
 		}
-		override def onRead[T](ep:Endpoint[T], length:Int){
+		override def onRead(ep:Endpoint, length:Int){
 			select.current.value += 1
 			read.current.value += length
 		}
-		override def onWrite[T](ep:Endpoint[T], length:Int){
+		override def onWrite(ep:Endpoint, length:Int){
 			select.current.value += 1
 			write.current.value += length
 		}
-		override def onOpen[T](endpoint:Endpoint[T]){
+		override def onOpen(endpoint:Endpoint){
 			endpointCount += 1
 		}
-		override def onClosed[T](endpoint:Endpoint[T]){
+		override def onClosed(endpoint:Endpoint){
 			endpointCount -= 1
 		}
 		override def onShutdown(){

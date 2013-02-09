@@ -6,8 +6,9 @@
 
 package org.koiroha.firestorm.server
 
-import org.koiroha.firestorm.core.{Server, Context}
-import org.koiroha.firestorm.http.{HttpServer, HttpProtocol}
+import java.util.concurrent.{LinkedBlockingQueue, TimeUnit, ThreadPoolExecutor, Executor}
+import org.koiroha.firestorm.core.Context
+import org.koiroha.firestorm.http.{ConcurrentWorker, HttpServer}
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,9 +19,21 @@ import org.koiroha.firestorm.http.{HttpServer, HttpProtocol}
  */
 object HttpTest {
 
+	class SampleWorker(e:Executor) extends ConcurrentWorker(e) {
+		def syncRun():Unit = {
+			response.sendResponseCode("HTTP/1.1", 200, "OK")
+			response.header("Connection") = "close"
+			response.header("Content-Type") = "text/plain"
+			response.print { out =>
+				out.println("hello, world")
+			}
+		}
+	}
+
 	def main(args:Array[String]):Unit = {
 		val context = new Context("http")
-		val server = HttpServer(context).listen(8085)
+		val executor = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue[Runnable]());
+		val server = HttpServer(context){ new SampleWorker(executor) }.listen(8085)
 	}
 
 }
