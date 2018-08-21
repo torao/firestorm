@@ -4,23 +4,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-package org.koiroha.firestorm
+package org.koiroha.firestorm.finagle
 
 import com.twitter.concurrent.{Offer, Broker}
-import org.jboss.netty.buffer.ChannelBuffer
-import com.twitter.util.{JavaTimer, Timer, Future}
-import scala.util.Random
-import org.jboss.netty.buffer.ChannelBuffers._
-import org.jboss.netty.util.CharsetUtil
 import com.twitter.finagle.Service
-import org.jboss.netty.handler.codec.http._
+import com.twitter.finagle.builder.ServerBuilder
 import com.twitter.finagle.stream.{Stream, StreamResponse}
-import com.twitter.finagle.builder.{ServerBuilder, Server}
+import com.twitter.util.{JavaTimer, Timer, Future}
 import java.net.{SocketAddress, InetSocketAddress}
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBuffers._
+import org.jboss.netty.handler.codec.http._
+import org.jboss.netty.util.CharsetUtil
+import org.koiroha.firestorm.MessageQueue
+import scala.util.Random
 
 class Server(address:SocketAddress, queue:MessageQueue) {
 
-	val server:Server = ServerBuilder()
+	val server:com.twitter.finagle.builder.Server = com.twitter.finagle.builder.ServerBuilder()
 		.codec(Stream())
 		.bindTo(address)
 		.name("streamserver")
